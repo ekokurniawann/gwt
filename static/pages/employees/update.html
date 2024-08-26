@@ -1,0 +1,47 @@
+{{template "layout" .}}
+
+{{define "main"}}
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <h1>Update Employee</h1>
+        <hr class="my-2">
+       
+        <form method="POST" action="/employees/update?id={{.Data.ID}}">
+           
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="{{.Data.Name}}" class="form-control mb-3" required>
+
+            
+            <label for="nip">NIP</label>
+            <input type="text" name="nip" id="nip" value="{{.Data.NIP}}" class="form-control mb-3" required>
+
+           
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address" value="{{.Data.Address}}" class="form-control mb-3" required>
+
+            <button class="btn btn-success" type="submit">Update Employee</button>
+        </form>
+    </div>
+</div>
+
+<script>
+  
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return Object.fromEntries(params.entries());
+    }
+
+    
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const queryParams = getQueryParams();
+        console.log('Query Parameters:', queryParams); 
+
+        if (queryParams.status === 'success') {
+            alert('Employee berhasil diperbarui!');
+        } else if (queryParams.status === 'error') {
+            alert('Gagal memperbarui employee. Silakan coba lagi.');
+        }
+    });
+</script>
+
+{{end}}
